@@ -129,6 +129,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   - The class should include a block comment containing the description of the class
   - The constructor should contain a JSDoc comment annotating any input parameters.
   - All methods and variables on a class must have `public` or `private` as a scope.
+  - Static methods and variables at the top of the class above instance methods and variables.
 
   ```typescript
   /**
@@ -140,7 +141,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
        * 
        * @param name The name of the new Person.
        */
-      public static GetPerson(name: string): Person {
+      public static getPerson(name: string): Person {
           return new Person(name);
       }
       
@@ -463,7 +464,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
        * @protected
        * Speed of the person in m/s.
        */
-      public __speed: number; 
+      public __speed: number = 5; 
       
       constructor(firstName: string, lastName: string) {
           this._firstName = firstName;
@@ -471,7 +472,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
           this._fullName = firstName + ' ' + lastName;
       }
       
-      _walkFor(millis: number): void {
+      private _walkFor(millis: number): void {
           console.log(this._fullName + ' is now walking ' + this.__speed + 'm/s.');
           
           // Wait for millis milliseconds to stop walking
@@ -480,7 +481,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
           }, millis);
       }
       
-      toString(): string {
+      public toString(): string {
           return this._fullName;
       }
   }
