@@ -128,6 +128,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   - Functions need to have a comment explaining what the function does, and all of the input parameters need to be annotated with `@param`. 
   - The class should include a block comment containing the description of the class
   - The constructor should contain a JSDoc comment annotating any input parameters.
+  - All methods and variables on a class must have `public` or `private` as a scope.
 
   ```typescript
   /**
@@ -139,7 +140,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
        * 
        * @param name The name of the new Person.
        */
-      static GetPerson(name: string): Person {
+      public static GetPerson(name: string): Person {
           return new Person(name);
       }
       
@@ -155,7 +156,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
        * @param millis The number of milliseconds the Person 
        * should walk.
        */
-      walkFor(millis: number) {
+      public walkFor(millis: number) {
           console.log(this.name + ' is now walking.');
           
           setTimeout(() => {
