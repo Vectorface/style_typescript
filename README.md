@@ -56,15 +56,13 @@ When developing software as an organization, the value of the software produced 
 
 ## Files
   - All TypeScript files must have a ".ts" extension.
-  - They should be all lower case, and only include letters, numbers, and periods. 
-  - It is OK (even recommended) to separate words with periods (e.g. `my.view.html`).
+  - Class files should be camel case starting with a capital (ie. MyClassName)
   - All files should end in a new line. This is necessary for some Unix systems.
 
 **[top](#table-of-contents)**
 
 ## Indentation
-  - The unit of indentation is four spaces. 
-  - **Never use tabs**, as this can lead to trouble when opening files in different IDEs/Text editors. Most text editors have a configuration option to change tabs to spaces.
+  - Always use tabs for indentation, a single tab should be equal to 4 spaces
 
 **[top](#table-of-contents)**
 
@@ -229,8 +227,8 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
       b = 4;
 
   // good
-  var a = 2,
-      b = 4;
+  var a = 2;
+  var b = 4;
       
   console.log(a + b);
   ```
@@ -248,19 +246,19 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   ```
 
-  - Use one `var` keyword to define a block of variables.
+  - Use one `var` keyword to define each variable.
   - Declare each variable on a newline.
   
   ```typescript
   // bad
-  var a = 2;
-  var b = 2;
-  var c = 4;
-
-  // good
   var a = 2,
       b = 2,
       c = 4;
+
+  // good
+  var a = 2;
+  var b = 2;
+  var c = 4;
   
   // bad
   // b will be defined on global scope.
@@ -311,7 +309,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   ```
 
-  - The body of the function should be indented 4 spaces.
+  - The body of the function should be indented 1 tab.
   - The right curly brace `}` should be on a new line.
   - The right curly brace `}` should be aligned with the line containing the left curly brace `{` that begins the function statement.
   
@@ -388,7 +386,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   });
   ```
 
-  - The statement body should be indented 4 spaces.
+  - The statement body should be indented 1 tab.
   - The right curly brace `}` should be on a new line.
   - The right curly brace `}` should be aligned with the line containing the  left curly brace `{` that begins the function statement.
 
@@ -407,21 +405,41 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 ### Types
 
   - Types should be used whenever necessary.
-  - Arrays should be defined as `Array<type>` instead of `type[]`.
-  - Use the `any` type sparingly, it is always better to define an interface.
-  - Always define the return type of functions.
-  - If TypeScript is capable of implicitly determining the return type of a function, then it is unnecessary to define the return type.
-  - Always define the types of variables/parameters unless TypeScript can implicitly infer their type.
+  - Arrays should be defined as `type[]` instead of `Array<type>`.
   
   ```typescript
   // bad
-  var numbers = [];
-
-  // bad
-  var numbers: number[] = [];
-
+  var myArray: Array<number> = [];
+  
   // good
-  var numbers: Array<number> = [];
+  var myArray: number[] = [];
+  
+  // bad 
+  var myGrid: Array<Array<number>> = [];
+  
+  // good
+  var myGrid: number[][] = [];
+  ```
+  - Use the `any` type sparingly, it is always better to define an interface.
+  - Always define the return type of functions.
+  - Always define the variable type
+  
+  ```typescript
+  // bad 
+  var x = 5;
+  
+  // good
+  var x: number = 5;
+    
+  // bad
+  function toString(someInt: number) {
+      return someInt.toString();
+  }
+  
+  // good
+  function toString(someInt: number): string {
+      return someInt.toString();
+  }
   ```
 
 **[top](#table-of-contents)**
@@ -430,29 +448,39 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
   - Classes/Constructors should use UpperCamelCase (PascalCase).
   - `Private` and `private static` members in classes should be denoted with the `private` keyword.
-  - `Private` and `private static` members should be prefaced with 2 underscores `__`.
-  - `Protected` members in classes do not use the `private` keyword.
-  - `Protected` members in classes should be prefaced with 1 underscore `_`.
+  - `Private` and `private static` members should be prefaced with 1 underscore `_`.
+  - `Protected` members in classes use the `public` keyword.
+  - `Protected` members in classes should have a `@protected` in their **JSDoc**
+  - `Protected` members in classes should be prefaced with 2 underscores `__`.
 
   ```typescript
   class Person {
-      private __fullName: string;
+      private _fullName: string;
+      private _firstName: string;
+      private _lastName: string;
+      /**
+       * @protected
+       * Speed of the person in m/s.
+       */
+      public __speed: number; 
       
-      constructor(public firstName: string, public lastName: string) {
-          this.__fullName = firstName + ' ' + lastName;
+      constructor(firstName: string, lastName: string) {
+          this._firstName = firstName;
+          this._lastName = lastName;
+          this._fullName = firstName + ' ' + lastName;
       }
       
-      _walkFor(millis: number) {
-          console.log(this.__fullName + ' is now walking.');
+      _walkFor(millis: number): void {
+          console.log(this._fullName + ' is now walking ' + this.__speed + 'm/s.');
           
           // Wait for millis milliseconds to stop walking
           setTimeout(() => {
-              console.log(this.__fullName + ' has stopped walking.');
+              console.log(this._fullName + ' has stopped walking.');
           }, millis);
       }
       
-      toString() {
-          return this.__fullName;
+      toString(): string {
+          return this._fullName;
       }
   }
   ```
@@ -478,6 +506,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 ### Constants
 
   - All constants should use UPPER_SNAKE_CASE.
+  - All constant events should use EVT_UPPER_SNAKE_CASE.
 
 **[top](#table-of-contents)**
 
@@ -506,15 +535,16 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
 Compound statements are statements containing lists of statements enclosed in curly braces `{}`.
 
-  - The enclosed statements should start on a newline.
-  - The enclosed statements should be indented 4 spaces.
+  - The enclosed statements should start on a newline if it's a multi-line statement.
+  - The enclosed statements should be indented 1 tab.
 
   ```typescript
   // bad
-  if (condition === true) { alert('Passed!'); }
+  if (condition) { condition = false; alert('Passed!'); }
   
   // good
-  if (condition === true) { 
+  if (condition) { 
+      condition = false;
       alert('Passed!'); 
   }
   ```
@@ -523,50 +553,27 @@ Compound statements are statements containing lists of statements enclosed in cu
   
   ```typescript
   // bad
-  if (condition === true)
+  if (condition)
   { 
+      condition = false;
       alert('Passed!');
   }
 
   // good
-  if (condition === true) {
+  if (condition) {
+      condition = false;
       alert('Passed!');
   }
   ```
   
-  - **Braces `{}` must be used around all compound statements** even if they are only single-line statements.
-  
-  ```typescript
-  // bad
-  if (condition === true) alert('Passed!');
-
-  // bad
-  if (condition === true)
-      alert('Passed!');
-  
-  // good
-  if (condition === true) {
-      alert('Passed!');
-  }
-  ```
-
-If you do not add braces `{}` around compound statements, it makes it very easy to accidentally introduce bugs.
-
-  ```typescript
-  if (condition === true)
-      alert('Passed!');
-      return condition;
-  ```
-  
-It appears the intention of the above code is to return if `condition === true`, but without braces `{}` the return statement will be executed regardless of the condition.
-
-  - Compount statements do not need to end in a semicolon `;` with the exception of a `do { } while();` statement.
+  - **Braces `{}` must be used around all multi-line compound statements**.
+  - Compound statements do not need to end in a semicolon `;` with the exception of a `do { } while();` statement.
 
 **[top](#table-of-contents)**
 
 ### Return
 
-  - If a `return` statement has a value you should not use parenthesis `()` around the value.
+  - If a `return` statement has a value you should not use parenthesis `()` around the value, unless it helps readability.
   - The return value expression must start on the same line as the `return` keyword.
   
   ```typescript
@@ -579,6 +586,9 @@ It appears the intention of the above code is to return if `condition === true`,
 
   // good
   return 'Hello World!';
+  
+  // good
+  return (override || ((x + 5 < y) && (y < z)));
   ```
 
   - It is recommended to take a return-first approach whenever possible.
@@ -586,7 +596,7 @@ It appears the intention of the above code is to return if `condition === true`,
   ```typescript
   // bad
   function getHighestNumber(a: number, b: number): number {
-      var out = b;
+      var out: number = b;
 
       if(a >= b) {
           out = a;
@@ -623,21 +633,21 @@ It appears the intention of the above code is to return if `condition === true`,
 
 ### If
 
-  - Alway be explicit in your `if` statement conditions.
+  - Always be explicit in your `if` statement conditions when not dealing with any other type other than `boolean`.
   
   ```typescript
   // bad
-  function isString(str: any) {
+  function isString(str: any): boolean {
       return !!str;
   }
 
   // good
-  function isString(str: any) {
+  function isString(str: any): boolean {
       return typeof str === 'string';
   }
   ```
 
-Sometimes simply checking falsy/truthy values is fine, but the general approach is to be explicit with what you are looking for. This can prevent a lot of unncessary bugs.
+Sometimes simply checking falsy/truthy values is fine, but the general approach is to be explicit with what you are looking for. This can prevent a lot of unnecessary bugs.
 
 If statements should take the following form:
 
@@ -822,12 +832,12 @@ Blank lines improve code readability by allowing the developer to logically grou
   
   ```typescript
   // bad
-  for(var i = 0;i < 10;++i) {
+  for(var i: number = 0;i < 10;i++) {
       // ...
   }
 
   // good
-  for(var i = 0; i < 10; ++i) {
+  for(var i: number = 0; i < 10; i++) {
       // ...
   }
   ```
@@ -864,6 +874,33 @@ Blank lines improve code readability by allowing the developer to logically grou
 ## === and !== Operators
 
   - It is better to use `===` and `!==` operators whenever possible.
+  - For `boolean`s only you can use variable-only statements 
+
+  ```typescript
+  // bad
+  var x: number = 0;
+  // some stuff
+  if (x) {
+      // do something
+  }
+  
+  // good
+  var x: number = 0;
+  // some stuff
+  if (x != 0) {
+      // do something
+  }
+  
+  // good
+  var x: number = 0;
+  // some stuff
+  var y: boolean = (x != 0);
+  // maybe more stuff
+  if (y) {
+      // do something
+  }
+  ```
+  
   - `==` and `!=` operators do type coercion, which can lead to headaches when debugging code.
 
 **[top](#table-of-contents)**
