@@ -116,7 +116,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
    * 
    * @param name The name of the greeted person.
    */
-  function getGreeting(name: string): string {
+  function getGreeting(name:string):string {
       return 'Hello ' + name + '!';
   }
   ```
@@ -141,14 +141,14 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
        * 
        * @param name The name of the new Person.
        */
-      public static getPerson(name: string): Person {
+      public static getPerson(name:string):Person {
           return new Person(name);
       }
       
       /**
        * @param name The name of the new Person.
        */
-      constructor(public name: string) { }
+      constructor(public name:string) { }
 
       /**
        * Instructs this Person to walk for a certain amount 
@@ -157,7 +157,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
        * @param millis The number of milliseconds the Person 
        * should walk.
        */
-      public walkFor(millis: number) {
+      public walkFor(millis:number) {
           console.log(this.name + ' is now walking.');
           
           setTimeout(() => {
@@ -179,14 +179,14 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
   ```typescript
   // bad
-  var lines: Array<string>; // Holds all the lines in the file.
+  var lines:Array<string>; // Holds all the lines in the file.
   
   // good
   // Holds all the lines in the file.
-  var lines: Array<string>;
+  var lines:Array<string>;
   
   // bad
-  function walkFor(name: string, millis: number) {
+  function walkFor(name:string, millis:number) {
       console.log(name + ' is now walking.');
       // Wait for millis milliseconds to stop walking
       setTimeout(() => {
@@ -195,7 +195,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   
   // good
-  function walkFor(name: string, millis: number) {
+  function walkFor(name:string, millis:number) {
       console.log(name + ' is now walking.');
       
       // Wait for millis milliseconds to stop walking
@@ -240,7 +240,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   ```typescript
   // bad
-  function add(a: number, b: number) {
+  function add(a:number, b:number) {
       // c is on the global scope!
       c = 6;
       
@@ -274,7 +274,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
   ```typescript
   // bad
-  function createGreeting(name: string): string {
+  function createGreeting(name:string):string {
       var message = 'Hello ';
 
       return greet;
@@ -285,7 +285,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   
   // good
-  function createGreeting(name: string): string {
+  function createGreeting(name:string):string {
       var message = 'Hello ';
 
       function greet() {
@@ -317,11 +317,11 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   ```typescript
   // bad
-  function foo(): string {
+  function foo():string {
     return 'foo';}
 
   // good
-  function foo(): string {
+  function foo():string {
       return 'foo';
   }
   ```
@@ -337,7 +337,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   }
   
   // good
-  function greet(name: string) {
+  function greet(name:string) {
     // ...
   }
   ```
@@ -356,7 +356,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
       
       this.foo = 'foo';
       
-      element.addEventListener('click', function(ev: Event) {
+      element.addEventListener('click', function(ev:Event) {
           // this.foo does not exist!
           alert(this.foo);
       });
@@ -368,7 +368,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
       
       this.foo = 'foo';
       
-      element.addEventListener('click', (ev: Event) => {
+      element.addEventListener('click', (ev:Event) => {
           // TypeScript allows this.foo to exist!
           alert(this.foo);
       });
@@ -380,10 +380,10 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
   ```typescript
   // bad
-  element.addEventListener('click', (ev: Event)=>{alert('foo');});
+  element.addEventListener('click', (ev:Event)=>{alert('foo');});
   
   // good
-  element.addEventListener('click', (ev: Event) => {
+  element.addEventListener('click', (ev:Event) => {
       alert('foo');
   });
   ```
@@ -411,16 +411,16 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   ```typescript
   // bad
-  var myArray: Array<number> = [];
+  var myArray:Array<number> = [];
   
   // good
-  var myArray: number[] = [];
+  var myArray:number[] = [];
   
   // bad 
-  var myGrid: Array<Array<number>> = [];
+  var myGrid:Array<Array<number>> = [];
   
   // good
-  var myGrid: number[][] = [];
+  var myGrid:number[][] = [];
   ```
   - Use the `any` type sparingly, it is always better to define an interface.
   - Always define the return type of functions.
@@ -431,15 +431,15 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   var x = 5;
   
   // good
-  var x: number = 5;
+  var x:number = 5;
     
   // bad
-  function toString(someInt: number) {
+  function toString(someInt:number) {
       return someInt.toString();
   }
   
   // good
-  function toString(someInt: number): string {
+  function toString(someInt:number):string {
       return someInt.toString();
   }
   ```
@@ -457,22 +457,22 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
   ```typescript
   class Person {
-      private _fullName: string;
-      private _firstName: string;
-      private _lastName: string;
+      private _fullName:string;
+      private _firstName:string;
+      private _lastName:string;
       /**
        * @protected
        * Speed of the person in m/s.
        */
-      public __speed: number = 5; 
+      public __speed:number = 5; 
       
-      constructor(firstName: string, lastName: string) {
+      constructor(firstName:string, lastName:string) {
           this._firstName = firstName;
           this._lastName = lastName;
           this._fullName = firstName + ' ' + lastName;
       }
       
-      private _walkFor(millis: number): void {
+      private _walkFor(millis:number):void {
           console.log(this._fullName + ' is now walking ' + this.__speed + 'm/s.');
           
           // Wait for millis milliseconds to stop walking
@@ -481,7 +481,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
           }, millis);
       }
       
-      public toString(): string {
+      public toString():string {
           return this._fullName;
       }
   }
@@ -497,9 +497,9 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   ```typescript
   interface IPerson {
-      firstName: string;
-      lastName: string;
-      toString(): string;
+      firstName:string;
+      lastName:string;
+      toString():string;
   }
   ```
 
@@ -597,8 +597,8 @@ Compound statements are statements containing lists of statements enclosed in cu
   
   ```typescript
   // bad
-  function getHighestNumber(a: number, b: number): number {
-      var out: number = b;
+  function getHighestNumber(a:number, b:number):number {
+      var out:number = b;
 
       if(a >= b) {
           out = a;
@@ -608,7 +608,7 @@ Compound statements are statements containing lists of statements enclosed in cu
   }
   
   // good
-  function getHighestNumber(a: number, b: number): number {
+  function getHighestNumber(a:number, b:number):number {
       if(a >= b) {
           return a;
       }
@@ -621,12 +621,12 @@ Compound statements are statements containing lists of statements enclosed in cu
 
   ```typescript
   // bad
-  function getPerson(name: string) {
+  function getPerson(name:string) {
       return new Person(name);
   }
   
   // good
-  function getPerson(name: string): Person {
+  function getPerson(name:string):Person {
       return new Person(name);
   }
   ```
@@ -639,12 +639,12 @@ Compound statements are statements containing lists of statements enclosed in cu
   
   ```typescript
   // bad
-  function isString(str: any): boolean {
+  function isString(str:any):boolean {
       return !!str;
   }
 
   // good
-  function isString(str: any): boolean {
+  function isString(str:any):boolean {
       return typeof str === 'string';
   }
   ```
@@ -752,13 +752,13 @@ Try statements should have the following form:
   ```typescript
   try {
       // ...
-  } catch (error: Error) {
+  } catch (error:Error) {
       // ...
   }
   
   try {
       // ...
-  } catch (error: Error) {
+  } catch (error:Error) {
       // ...
   } finally {
       // ...
@@ -834,12 +834,12 @@ Blank lines improve code readability by allowing the developer to logically grou
   
   ```typescript
   // bad
-  for(var i: number = 0;i < 10;i++) {
+  for(var i:number = 0;i < 10;i++) {
       // ...
   }
 
   // good
-  for(var i: number = 0; i < 10; i++) {
+  for(var i:number = 0; i < 10; i++) {
       // ...
   }
   ```
@@ -880,23 +880,23 @@ Blank lines improve code readability by allowing the developer to logically grou
 
   ```typescript
   // bad
-  var x: number = 0;
+  var x:number = 0;
   // some stuff
   if (x) {
       // do something
   }
   
   // good
-  var x: number = 0;
+  var x:number = 0;
   // some stuff
   if (x != 0) {
       // do something
   }
   
   // good
-  var x: number = 0;
+  var x:number = 0;
   // some stuff
-  var y: boolean = (x != 0);
+  var y:boolean = (x != 0);
   // maybe more stuff
   if (y) {
       // do something
