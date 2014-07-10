@@ -904,6 +904,7 @@ Blank lines improve code readability by allowing the developer to logically grou
   ```
   
   - `==` and `!=` operators do type coercion, which can lead to headaches when debugging code.
+  - It is acceptable to do `==` and `!=` on objects so you do not need to check for `null` and `undefined` in a multi-level object (this could result in a very large if statement).
 
 **[top](#table-of-contents)**
 
