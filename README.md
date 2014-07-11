@@ -1,6 +1,6 @@
 # TypeScript Style Guide
 
-This is the TypeScript style guide that we use internally at Platypi! It is *semi-reasonable*, but it's more important that we keep a consistent look/feel of our code.
+This is the TypeScript style guide that we use internally at Vectorface! It is *semi-reasonable*, but it's more important that we keep a consistent look/feel of our code.
 
 
 ## Table of Contents
