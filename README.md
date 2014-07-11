@@ -1,6 +1,6 @@
 # TypeScript Style Guide
 
-This is the TypeScript style guide that we use internally at Platypi! It is *semi-reasonable*, but it's more important that we keep a consistent look/feel of our code.
+This is the TypeScript style guide that we use internally at Vectorface! It is *semi-reasonable*, but it's more important that we keep a consistent look/feel of our code.
 
 
 ## Table of Contents
@@ -15,6 +15,7 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
     1. [Class](#class)
     1. [Inline](#inline)
     1. [Todo and XXX](#todo-and-xxx)
+	1. [Commented Code](#commented-code)
   1. [Variable Declarations](#variable-declarations)
   1. [Function Declarations](#function-declarations)
     1. [Anonymous Functions](#anonymous-functions)
@@ -77,19 +78,19 @@ When developing software as an organization, the value of the software produced 
 
   ```typescript
   // bad
-  var greeting = "Hello World!";
+  var greeting:string = "Hello World!";
   
   // good
-  var greeting = 'Hello World!';
+  var greeting:string = 'Hello World!';
   
   // bad
-  var html = "<div class='bold'>Hello World</div>";
+  var html:string = "<div class='bold'>Hello World</div>";
   
   // bad
-  var html = '<div class=\'bold\'>Hello World</div>';
+  var html:string = '<div class=\'bold\'>Hello World</div>';
   
   // good
-  var html = '<div class="bold">Hello World</div>';
+  var html:string = '<div class="bold">Hello World</div>';
   ```
 
 **[top](#table-of-contents)**
@@ -217,6 +218,17 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
 **[top](#table-of-contents)**
 
+
+### Commented Code
+
+  - Commented Code should only be used in cases where code will be implemented in the future, but for some reason it is not now.
+  - No Commented Code should be left purely because it was the previous implementation or an attempt at a new implementation; the source repository has the full history of changes if a revert is required.
+  - If code is to be left around in a commented state, it should be accompanied by a comment (at the beginning of the block of code) that explains why it is still there.
+  - Any code that is commented should be done so in `/*...*/` blocks.
+
+**[top](#table-of-contents)**
+
+
 ## Variable Declarations
 
   - All variables must be declared prior to using them. This aids in code readability and helps prevent undeclared variables from being hoisted onto the global scope. 
@@ -225,12 +237,12 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   // bad
   console.log(a + b);
 
-  var a = 2,
-      b = 4;
+  var a:number = 2,
+      b:number = 4;
 
   // good
-  var a = 2;
-  var b = 4;
+  var a:number = 2;
+  var b:number = 4;
       
   console.log(a + b);
   ```
@@ -253,14 +265,14 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   ```typescript
   // bad
-  var a = 2,
-      b = 2,
-      c = 4;
+  var a:number = 2,
+      b:number = 2,
+      c:number = 4;
 
   // good
-  var a = 2;
-  var b = 2;
-  var c = 4;
+  var a:number = 2;
+  var b:number = 2;
+  var c:number = 4;
   
   // bad
   // b will be defined on global scope.
@@ -275,7 +287,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   ```typescript
   // bad
   function createGreeting(name:string):string {
-      var message = 'Hello ';
+      var message:string = 'Hello ';
 
       return greet;
 
@@ -286,7 +298,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   // good
   function createGreeting(name:string):string {
-      var message = 'Hello ';
+      var message:string = 'Hello ';
 
       function greet() {
           return message + name + '!';
@@ -297,16 +309,16 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   ```
 
   - There should be no space between the name of the function and the left parenthesis `(` of its parameter list.
-  - There should be one space between the right parenthesis `)` and the left curly `{` brace that begins the statement body.
+  - There should be one space between the return type, ie `:void`, and the left curly `{` brace that begins the statement body.
 
   ```typescript
   // bad
-  function foo (){
+  function foo ():void{
       // ...
   }
   
   // good
-  function foo() {
+  function foo():void {
       // ...
   }
   ```
@@ -328,16 +340,16 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   - For each function parameter
     - There should be no space between the parameter and the colon `:` indicating the type declaration.
-    - There should be a space between the colon `:` and the type declaration.
+	- There should also be no space between the closing parenthesis `)` and the return type, ie `:string`.
 
   ```typescript
   // bad
-  function greet(name:string) {
+  function greet(name:string):string {
     // ...
   }
   
   // good
-  function greet(name:string) {
+  function greet(name:string):string {
     // ...
   }
   ```
@@ -352,7 +364,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   ```typescript
   // bad
   clickAlert() {
-      var element = document.querySelector('div');
+      var element:Element = document.querySelector('div');
       
       this.foo = 'foo';
       
@@ -364,7 +376,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   // good
   clickAlert() {
-      var element = document.querySelector('div');
+      var element:Element = document.querySelector('div');
       
       this.foo = 'foo';
       
@@ -396,7 +408,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
 
 ## Names
 
-  - All variable and function names should be formed with alphanumeric `A-Z, a-z, 0-9` and underscore `_` charcters.
+  - All variable and function names should be formed with alphanumeric `A-Z, a-z, 0-9` and underscore `_` characters.
 
 ### Variables, Modules, and Functions
 
@@ -424,7 +436,7 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   ```
   - Use the `any` type sparingly, it is always better to define an interface.
   - Always define the return type of functions.
-  - Always define the variable type
+  - Always define the variable type.
   
   ```typescript
   // bad 
@@ -521,12 +533,12 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   
   ```typescript
   // bad
-  var greeting = 'Hello World'
+  var greeting:string = 'Hello World'
 
   alert(greeting)
   
   // good
-  var greeting = 'Hello World';
+  var greeting:string = 'Hello World';
 
   alert(greeting);
   ```
@@ -684,10 +696,10 @@ For statements should have the following form:
       // ...
   }
   
-  var keys = Object.keys(/* object */),
-      length = keys.length;
+  var keys:string[] = Object.keys(/* object */);
+  var length:number = keys.length;
   
-  for(var i = 0; i < length; ++i) {
+  for(var i:number = 0; i < length; ++i) {
       // ...
   }
   ```
@@ -802,32 +814,32 @@ Blank lines improve code readability by allowing the developer to logically grou
 
   ```typescript
   // bad
-  var sum = a+b;
+  var sum:number = a+b;
   
   // good
-  var sum = a + b;
+  var sum:number = a + b;
   
   // bad
-  var name = person . name;
+  var name:string = person . name;
   
   // good
-  var name = person.name;
+  var name:string = person.name;
   
   // bad
-  var item = items [4];
+  var item:number[] = items [4];
   
   // good
-  var item = items[4];
+  var item:number[] = items[4];
   ```
 
   - No space should separate a unary/incremental operator `!x, -x, +x, ~x, ++x, --x` and its operand.
   
   ```typescript
   // bad
-  var neg = - a;
+  var neg:number = - a;
 
   // good
-  var neg = -a;
+  var neg:number = -a;
   ```
   
   - Each semicolon `;` in the control part of a `for` statement should be followed with a space.
