@@ -15,6 +15,7 @@ This is the TypeScript style guide that we use internally at Platypi! It is *sem
     1. [Class](#class)
     1. [Inline](#inline)
     1. [Todo and XXX](#todo-and-xxx)
+	1. [Commented Code](#commented-code)
   1. [Variable Declarations](#variable-declarations)
   1. [Function Declarations](#function-declarations)
     1. [Anonymous Functions](#anonymous-functions)
@@ -216,6 +217,17 @@ JSDocs can be interpreted by IDEs for better intellisense. Below is an example o
   - It is best to write code that doesn't need `TODO` and `XXX` annotations, but sometimes it is unavoidable. 
 
 **[top](#table-of-contents)**
+
+
+### Commented Code
+
+  - Commented Code should only be used in cases where code will be implemented in the future, but for some reason it is not now.
+  - No Commented Code should be left purely because it was the previous implementation or an attempt at a new implementation; the source repository has the full history of changes if a revert is required.
+  - If code is to be left around in a commented state, it should be accompanied by a comment (at the beginning of the block of code) that explains why it is still there.
+  - Any code that is commented should be done so in `\*...*/` blocks.
+
+**[top](#table-of-contents)**
+
 
 ## Variable Declarations
 
